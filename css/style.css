@@ -42,9 +42,29 @@ p{
 #header{
 }
 
+.q-mark{
+    margin-right:5px;
+}
 
 body{
     height:100%;
+}
+
+#webapp-info{
+    margin-top:5px;
+}
+
+.fa-question-circle{
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    /* ...and now for the proper property */
+    transition:.5s;
+}
+
+.fa-question-circle:hover{
+    color:#ff5e57;
 }
 .col-sm-3{
     background-color: #d2dae2;

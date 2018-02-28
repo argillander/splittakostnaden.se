@@ -1,12 +1,17 @@
 /**
  * Created by Joakim on 2018-02-27.
+ *
+ * Algorithm by Axel Johansson
  */
 
-window.onload = function(){
-    initPersons();
-//    init();
 
-};
+
+function initTransactionEngine(){
+    initPersons();
+
+}
+
+
 
 
 
@@ -95,7 +100,6 @@ function calculateTransactions(){
     globalAvg = avg;
 
     while(!finished){
-        console.log("running");
         expenses.sort(costSorter);
 
         var currPerson = expenses.last();

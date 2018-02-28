@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="mobile-web-app-capable" content="yes">
 
+    <link rel="manifest" href="manifest.json">
+
 
 
     <meta charset="UTF-8">
@@ -48,9 +50,19 @@
                 onclick="return calculateHandler()">Räkna ut!</button>
   <!--      <button class="btn btn-primary btn-lg" id="addPersonButton" onclick="return addPersonHandler()">+</button> -->
         <div id="alert" class="alert alert-danger collapse" role="alert">Hoppsan!
-            Fyll i minst två personer för att räkna ut hur ni ska swisha ;)    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            Fyll i minst två personer för att räkna ut hur ni ska swisha ;) Behöver du hjälp? <u><b onclick="javscript:$('#helpModal').modal();">Klicka HÄR!</b></u> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>     </div>
+
+        <div id="webapp-info" style="display:none" class="alert alert-primary alert-dismissible fade show" role="alert">
+            <strong></strong> Lägg till applikationen på hemskärmen för att enkelt komma åt den när du bäst behöver det!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+
+
     </div>
 </div>
 <div id="main" class="justify-content-center container-fluid">
@@ -60,8 +72,8 @@
 
             <div class="form-group col-xl-3 pull-left person-input">
                 <label class="person-label" for="person1">Person 1</label>
-                <input type="text" class="form-control input-lg form-control-lg" id="person1" aria-describedby="" placeholder="Ex. Joakim">
-                <input type="number" min="0" class="form-control input-lg form-control-lg" id="person1Amt" aria-describedby="" placeholder="Ex. 1350 kr">
+                <input type="text" class="form-control input-lg form-control-lg" id="person1" aria-describedby="" placeholder="ex. Joakim">
+                <input type="number" min="0" class="form-control input-lg form-control-lg" id="person1Amt" aria-describedby="" placeholder="ex. 1350 kr">
 
             </div>
             <div class="form-group col-sm-3 pull-left person-input" id="addPersonDiv">
@@ -96,9 +108,64 @@
     </div>
 </div>
 
+<div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title" id="helpModalLabel"><i class="fa fa-question-circle q-mark"> </i>Hjälp</h1>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="helpModalBody">
+                <p>Såhär gör du</p>
+                Fyll i namn och utlagt belopp för varje person som ska vara med och dela på totalkostnaden. Klicka på <i>Räkna ut!</i> för att räkna ut
+                hur transaktionerna (swisharna) ska genomföras. Lägg till fler personer som ska dela på kostnaden genom att klicka på plustecknet. Lägg även till
+                personer med 0 kr i utlägg för att de ska vara med och dela på kostnaderna.
+                <p></p>
+                <p>FAQ</p>
+
+                <p></p>
+                <b>Vad är Swish?</b>
+                <p></p>
+                <i><a target="_blank" href="http://www.getswish.com/">Detta</a></i>
+                <p></p>
+                <b>Sidan visar att jag ska swisha till någon som inte lagt ut pengar, hur går det till?</b>
+                <p></p>
+                <i>Algoritmen tillåter att man 'kors-swishar' för att jämna ut beloppet. Detta säkerställer att för n personer kommer maximalt n-1 swishningar
+                krävas för att lösa ut alla personer. Var bara lugn, det kommer att bli rätt ändå! </i>
+                <p></p>
+                <b>Det saknas en krona i totalsumman, var tog den vägen?</b>
+                <p></p>
+                <i>Vid uträkningen sker en öresavrundning som gör att totalbeloppet inte alltid kommer att summeras exakt. Utvecklaren är övertygad om att den
+                saknade kronan kan återbetalas till dess rättmätige ägare i form av ett leende, eller en vänlig gest när tillfälle ges.</i>
+                <p></p>
+                <b>Om man summerar alla transaktioner så blir inte totalbeloppet detsamma som anges!?</b>
+                <p></p>
+                <i>Det stämmer! Alla utlagda pengar kommer inte att ha swishats runt eftersom det endast är mellanskillnaden mellan det belopp som ska betalas och
+                    utlägget som kommer att räkas som en transaktion. Om man räknar samman alla inkommande transaktioner och de utlägg så kommer alla att ha betalat
+                lika mycket. <br> <small>Hemlighet: Funktionalitet för att visa hela uträkningskedjan är under utveckling.</small></i>
+                <p></p>
+                <b>Jag saknar en funktionalitet på sidan :(</b>
+                <p></p>
+                <i>Coolt! Gör en bug report på GitHub (länk högst upp i hörnet), eller maila mig på joakim[at]argillander.se</i>
+                <p></p>
+                <hr>
+                <i>Skapad av Joakim Argillander, transaktionsalgoritm av Axel Johansson.</i>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Stäng</button>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
 <footer class="footer">
     <div class="container">
-        <span class="text-muted"><small>Joakim Argillander 2018</small></span>
+        <span class="text-muted"> <i class="fa fa-question-circle " onclick="javscript:$('#helpModal').modal();"></i> <small id="footer-signature">Joakim Argillander 2018</small></span>
+
     </div>
 </footer>
 </body>
