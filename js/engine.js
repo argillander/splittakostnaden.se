@@ -67,6 +67,7 @@ function displayHistory(){
 
 function payTo(payer, payee, amount){
     if(amount === 0) return;
+    if(payer === payee) return;
     payer.cost -= amount;
     payee.cost += amount;
     transactions.push(payer.name + " swishar " + Math.ceil(amount) + " kr till " + payee.name);

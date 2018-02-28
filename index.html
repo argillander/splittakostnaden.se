@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Utläggsräknaren</title>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -13,11 +13,19 @@
 
     <link rel="stylesheet" href="css/style.css">
 
-    <script type="text/template" id="addPerson2">
-        <div class ="col-sm-3">Added</div>
-    </script>
     <script src="js/index.js"></script>
     <script src="js/engine.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-48162518-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-48162518-2');
+    </script>
+
 
 </head>
 <body>
@@ -26,8 +34,13 @@
         <h1 class="display-4">Utläggsräknaren</h1>
         <p class="lead">Fyll i utlägg och personer och klicka på <b>Räkna ut</b> för att optimera swishningen! Fyll även i personer utan
             utlägg för att få med dessa i uträkningen.</p>
-        <button type="" id="calculateButton" class="btn btn-primary btn-lg" onclick="return calculateHandler()">Räkna ut!</button>
-        <button class="btn btn-primary btn-lg" id="addPersonButton" onclick="return addPersonHandler()">+</button>
+        <button type="" id="calculateButton" class="btn btn-primary btn-lg btn-info"
+                onclick="return calculateHandler()">Räkna ut!</button>
+  <!--      <button class="btn btn-primary btn-lg" id="addPersonButton" onclick="return addPersonHandler()">+</button> -->
+        <div id="alert" class="alert alert-danger collapse" role="alert">Hoppsan!
+            Fyll i minst två personer för att räkna ut hur ni ska swisha ;)    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>     </div>
     </div>
 </div>
 <div id="main" class="justify-content-center container-fluid">
@@ -35,13 +48,12 @@
     <form id="mainForm" class="">
         <div id="formPersons" class="container">
 
-            <div class="form-group col-sm-3 pull-left person-input">
+            <div class="form-group col-xl-3 pull-left person-input">
                 <label class="person-label" for="person1">Person 1</label>
                 <input type="text" class="form-control form-control-lg" id="person1" aria-describedby="" placeholder="Ex. Joakim">
-                <input type="number" min="0" class="form-control form-control-lg" id="person1Amt" aria-describedby="" placeholder="-1350 kr">
+                <input type="number" min="0" class="form-control form-control-lg" id="person1Amt" aria-describedby="" placeholder="1350 kr">
             </div>
             <div class="form-group col-sm-3 pull-left person-input" id="addPersonDiv">
-
             </div>
 
         </div>
@@ -74,7 +86,7 @@
 
 <footer class="footer">
     <div class="container">
-        <span class="text-muted"><small>Joakim Argillander 2018   - <em>Fork me on GitHub</></em><a target="_blank" href="http://www.github.com/argillander/swishsplitt"><i class="fa fa-github fa-2x" style="color:black; margin:5px" ></i></small></a></span>
+        <span class="text-muted"><small>Joakim Argillander 2018   - <em>Fork me on GitHub</></em><a target="_blank" href="http://www.github.com/argillander/swishsplitt"><i class="fa fa-github fa-2x"  ></i></small></a></span>
     </div>
 </footer>
 </body>

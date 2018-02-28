@@ -3,7 +3,7 @@
  */
 
 
-var numberPersons = 0;
+var numberPersons = 1;
 
 function addPersonHandler(){
     addPerson();
@@ -13,6 +13,12 @@ function addPersonHandler(){
 
 function calculateHandler(){
     resetExpenses();
+
+    if($("#person1").val() === "" && $("#person2").val() === ""){
+        console.log("persons empty");
+        $("#alert").fadeIn(1000).delay(2000).fadeOut(2000);
+    }
+
     for(var i = 1; i <= numberPersons; i++){
         var person = $("#person" + i).val();
         if(person === ""){
@@ -21,6 +27,10 @@ function calculateHandler(){
         }
         var amount = $("#person" + i + "Amt").val();
         amount = parseInt(amount);
+
+        if(isNaN(amount)){
+            amount = 0;
+        }
 
         //Ensure correct sign on input format
         amount = -1 * Math.abs(amount);
@@ -40,16 +50,22 @@ function calculateHandler(){
 
 function addPerson(){
     var persons = $("#formPersons");
-    numberPersons++;
     i = numberPersons +1;
-    var html = '<div class="form-group col-sm-3 pull-left person-input"><label class="person-label" for="person' + i + '">Person '+i+'</label> <input type="text" class="form-control form-control-lg" ' +
+    numberPersons = i;
+    var html = '<div class="form-group col-xl-3 pull-left person-input" id="addPersonDiv'+i+'"><label class="person-label" for="person' + i + '">Person '+i+'</label> <input type="text" class="form-control form-control-lg" ' +
         'id="person' + i + '"aria-describedby="" placeholder="Person ' + i + '"> <input type="number" class="form-control form-control-lg" ' +
         'id="person' + i + 'Amt" aria-describedby="" placeholder="0 kr"> </div>';
+
+
     $("#addPersonDiv").remove();
     persons.append(html);
-    var addPersonDiv = '<div onclick="addPersonHandler()" class="form-group col-sm-3 pull-left person-input" id=addPersonDiv>' +
-        '<p id="addPersonText" class="fa fa-plus-square fa-5x"></p></div>';
+    var addPersonDiv = '<div class="form-group col-sm-3 pull-left person-input text-center" id=addPersonDiv>' +
+        '<p id="addPersonText" onclick="addPersonHandler()" class="fa fa-plus-square fa-5x"></p></div>';
     persons.append(addPersonDiv);
+
+    $("#addPersonDiv" +i).hide();
+    console.log("hiding  addpersonDiv "+ i);
+    $("#addPersonDiv" +i).fadeIn(300);
 
 }
 
