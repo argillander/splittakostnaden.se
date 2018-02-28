@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Utläggskollen</title>
+
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- Font-Awesome fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script type="text/template" id="addPerson2">
+        <div class ="col-sm-3">Added</div>
+    </script>
+    <script src="js/index.js"></script>
+    <script src="js/engine.js"></script>
+
+</head>
+<body>
+
+<div id="main" class="d-flex justify-content-center">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Utläggskollen</h1>
+            <p class="lead">Fyll i utlägg och personer och klicka på <b>Räkna ut</b> för att optimera swishningen!</p>
+            <button type="" class="btn btn-primary" onclick="return calculateHandler()">Räkna ut!</button>
+            <button class="btn btn-primary" id="addPersonButton" onclick="return addPersonHandler()">+</button>
+        </div>
+    </div>
+    <form id="mainForm">
+        <div id="formPersons">
+
+            <div class="form-group col-sm-3 person-input"><label class="person-label" for="person1">Person 1</label>
+                <input type="text" class="form-control form-control-lg" id="person1" aria-describedby="" placeholder="Ex. Joakim">
+                <input type="number" class="form-control form-control-lg" id="person1Amt" aria-describedby="" placeholder="-1350 kr">
+            </div>
+
+
+        </div>
+
+    </form>
+
+</div>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Swisha såhär!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="transactionHistory">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Stäng</button>
+                <button type="button" class="btn btn-primary" onclick="return printTransactions()">Skriv ut</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <span class="text-muted">
+            <a target="_blank" href="http://www.github.com/argillander"><i class="fa fa-github fa-2x" style="color:black; margin:5px"></i></a>
+        </span>
+    </div>
+</footer>
+</body>
+</html>
