@@ -13,6 +13,10 @@ Array.prototype.last = function() {
     return this[this.length-1];
 };
 
+Array.prototype.clear = function(){
+    this.length = 0;
+}
+
 Array.prototype.first = function(){
     return this[0];
 };
@@ -20,6 +24,8 @@ Array.prototype.first = function(){
 var expenses = [];
 var transactions = [];
 var finished = false;
+var globalAvg = 0;
+var globalTotalCost = 0;
 
 function init(){
   /*
@@ -60,6 +66,7 @@ function displayHistory(){
 }
 
 function payTo(payer, payee, amount){
+    if(amount === 0) return;
     payer.cost -= amount;
     payee.cost += amount;
     transactions.push(payer.name + " swishar " + Math.ceil(amount) + " kr till " + payee.name);
@@ -72,11 +79,21 @@ function checkIfDone(){
     return true;
 }
 
+function resetExpenses(){
+    expenses.clear();
+    transactions.clear();
+    finished = false;
+    globalAvg = 0;
+    globalTotalCost = 0;
+}
 
 function calculateTransactions(){
     var avg = getAvg();
+    calculateTotalCost();
+    globalAvg = avg;
 
     while(!finished){
+        console.log("running");
         expenses.sort(costSorter);
 
         var currPerson = expenses.last();
@@ -97,11 +114,21 @@ function addExpense(person, expense){
 
 }
 
+function calculateTotalCost(){
+    for(var i = 0; i < expenses.length; i++){
+        globalTotalCost += expenses[i].cost;
+    }
+}
+
 function getHistoryString(){
     var s= "";
     for(var i = 0; i < transactions.length; i++){
         s += '<p>' +  transactions[i] + '</p>';
 
     }
+    s+= '<hr>';
+    s += '<h3> Kostnad per person: ' + Math.ceil(Math.abs(globalAvg)) + ' kr</h3>';
+    s += '<h4> Totalkostnad: ' + Math.abs(globalTotalCost) + ' kr</h4>';
+
     return s;
 }

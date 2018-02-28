@@ -1,40 +1,44 @@
 #main{
-    margin-top: 10px;
     margin-left:auto;
     margin-right:auto;
-    width:80%;
 }
 input{
     margin-top:10px;
 }
 
 .person-input{
-    width:100%;
 }
 .person-label{
     margin-top:10px !important;
 }
-.col-sm{
-    width:15%;
+
+#addPersonText{
+    text-align:center;
+    vertical-align:middle;
+    float:none;
 }
 
-button{
-
+p{
+    font-size:20px;
 }
 
-.row{
-
+#header{
 }
 
 .col-sm-3{
-    background-color: whitesmoke;
-    border:1px white solid;
-    height: 200px;
-    width: 250px;
+    background-color: #d2dae2;
+    border:2px white solid;
+    height:180px;
+
+    border-radius:10px;
 }
 
+#addpersonDiv{
+    background-color:white !important;
+    text-align:center;
+}
 .footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
     height: 60px; /* Set the fixed height of the footer here */
