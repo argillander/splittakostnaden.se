@@ -62,6 +62,10 @@ body{
     border-radius:10px;
 }
 
+.jumbotron{
+
+}
+
 #addPersonDiv{
     background-color:white !important;
     text-align:center;
