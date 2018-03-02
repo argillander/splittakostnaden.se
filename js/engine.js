@@ -80,6 +80,8 @@ function payTo(payer, payee, amount){
 }
 
 function checkIfDone(){
+
+    //Works because length == 0 due to popping.
     for(var i = 0; i < expenses.length; i++){
         if(!(expenses[i].paidOff)) return false;
     }
@@ -118,6 +120,13 @@ function addExpense(person, expense){
     console.log("Adding expense " + person + " : " + expense + " kr");
     expenses.push({name:person, cost:expense, paidOff:false});
 
+}
+
+function nameExistsInArray(name){
+    for(var i = 0; i < expenses.length; i++){
+        if(expenses[i].name === name) return true;
+    }
+    return false;
 }
 
 function calculateTotalCost(){

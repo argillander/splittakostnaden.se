@@ -3,10 +3,8 @@
  */
 
 
-
 window.onload = function(){
-
-    initTransactionEngine()
+    initTransactionEngine();
 
     window.mobilecheck = function() {
         var check = false;
@@ -19,7 +17,7 @@ window.onload = function(){
         localStorage.setItem("shown-webapp-info", true);
     }
 
-    document.body.style.zoom = "100%";
+  //  document.body.style.zoom = "100%";
     window.addEventListener("load",function() {
         setTimeout(function(){
             // This hides the address bar:
@@ -50,7 +48,7 @@ window.onload = function(){
 var numberPersons = 1;
 
 function addPersonHandler(){
-    addPerson();
+    addPerson(true);
     return false;
 }
 
@@ -79,7 +77,13 @@ function calculateHandler(){
 
         //Ensure correct sign on input format
         amount = -1 * Math.abs(amount);
-
+        //Check such that no duplicate names may occur
+        if(nameExistsInArray(person)){
+            $("#duplicate-name-alert").fadeIn(1000).delay(2000).fadeOut(2000);
+            resetExpenses();
+            console.log("DUPNAME");
+            return;
+        }
         addExpense(person, amount);
     }
 
@@ -93,7 +97,7 @@ function calculateHandler(){
     return false;
 }
 
-function addPerson(){
+function addPerson(scroll){
     var persons = $("#formPersons");
     i = numberPersons +1;
     numberPersons = i;
@@ -106,11 +110,16 @@ function addPerson(){
     persons.append(html);
     var addPersonDiv = '<div class="form-group col-sm-3 pull-left person-input text-center" id=addPersonDiv>' +
         '<p id="addPersonText" onclick="addPersonHandler()" data-toggle="tooltip" title="Lägg till person" class="fa fa-plus-square fa-5x"></p></div>';
-    persons.append(addPersonDiv);
+   // persons.append(addPersonDiv);
 
     $("#addPersonDiv" +i).hide();
-    console.log("hiding  addpersonDiv "+ i);
     $("#addPersonDiv" +i).fadeIn(300);
+
+    if(scroll) {
+        console.log("scrolling to div");
+        var to = document.getElementById("person" + i);
+        zenscroll.center(to);
+    }
 
 }
 
@@ -121,7 +130,7 @@ function initPersons(){
     var html = "";
 
     for(var i = 0; i < 3; i++) {
-       addPerson();
+       addPerson(false);
 }
 
 
@@ -132,8 +141,16 @@ function initPersons(){
 function printTransactions(){
     $("#main").hide();
     $("#header").hide();
+    $("#github-corner").hide();
+    $("#help-icon").hide();
+
+
     print();
     $("#main").show();
     $("#header").show();
+    $("#github-corner").show();
+    $("#help-icon").show();
+
+
     return false;
 }

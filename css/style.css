@@ -14,8 +14,23 @@ input{
 .person-label{
     margin-top:10px !important;
 }
-#alert{
-    margin-top:5px;
+
+.fa-print{
+    margin-left:3px;
+    font-size:12px;
+}
+
+p{
+    font-size:20px;
+}
+.font-weight-light{
+    font-size:10px;
+}
+.alert{
+    width:100vw;
+    flex: 0 0 50px;/*or just height:50px;*/
+    margin-top: auto;
+    text-align:center;
     display:none;
 }
 
@@ -34,12 +49,9 @@ input{
 #addPersonText:hover{
     color:#05c46b;
 }
-
-p{
+#help-icon{
     font-size:20px;
-}
-
-#header{
+    margin-top:10px;
 }
 
 .q-mark{
@@ -47,7 +59,9 @@ p{
 }
 
 body{
-    height:100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 #webapp-info{
@@ -61,6 +75,12 @@ body{
     -webkit-transition:.5s;
     /* ...and now for the proper property */
     transition:.5s;
+    float:right;
+}
+
+#footer-container{
+    text-align:center;
+    font-size:45px;
 }
 
 .fa-question-circle:hover{
@@ -92,12 +112,13 @@ body{
 
 }
 .footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 60px; /* Set the fixed height of the footer here */
-    line-height: 60px; /* Vertically center the text there */
+    flex: 0 0 50px;/*or just height:50px;*/
+    margin-top: auto;
     background-color: #f5f5f5;
+}
+
+.footer-button{
+    margin-bottom:1.5vh;
 }
 
 .fa-github{
@@ -108,4 +129,3 @@ body{
     color:#6e5494;
     bottom:3px;
 }
-

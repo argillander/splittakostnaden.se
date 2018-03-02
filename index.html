@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+   <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" sizes="192x192" href="icon.png">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="mobile-web-app-capable" content="yes">
-
+    <meta name="description" content="Hur delar man notan? Räkna ut optimala antalet Swish-betalningar./>
     <link rel="manifest" href="manifest.json">
 
 
 
     <meta charset="UTF-8">
-    <title>Utläggsräknaren</title>
+    <title>Splitta kostnaden</title>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -25,6 +27,7 @@
     <link rel="stylesheet" href="css/style.css">
 
     <script src="js/index.js"></script>
+    <script src="js/zenscroll-min.js"></script>
     <script src="js/engine.js"></script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -40,26 +43,16 @@
 
 </head>
 <body>
-<a target="_blank" href="https://github.com/argillander/swishsplitt" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<a target="_blank" href="https://github.com/argillander/swishsplitt" id="github-corner" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 <div class="jumbotron jumbotron-fluid" id="header">
     <div class="container">
-        <h1 class="display-4">Utläggsräknaren</h1>
+        <h1 class="display-4">Splitta kostnaden</h1>
         <p class="lead">Fyll i utlägg och personer och klicka på <b>Räkna ut</b> för att optimera swishningen! Fyll även i personer utan
             utlägg för att dela kostnaden med dessa.</p>
-        <button type="" id="calculateButton" class="btn btn-primary btn-lg btn-info"
-                onclick="return calculateHandler()">Räkna ut!</button>
-  <!--      <button class="btn btn-primary btn-lg" id="addPersonButton" onclick="return addPersonHandler()">+</button> -->
-        <div id="alert" class="alert alert-danger collapse" role="alert">Hoppsan!
-            Fyll i minst två personer för att räkna ut hur ni ska swisha ;) Behöver du hjälp? <u><b onclick="javscript:$('#helpModal').modal();">Klicka HÄR!</b></u> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>     </div>
 
-        <div id="webapp-info" style="display:none" class="alert alert-primary alert-dismissible fade show" role="alert">
-            <strong></strong> Lägg till applikationen på hemskärmen för att enkelt komma åt den när du bäst behöver det!
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+
+        <!--      <button class="btn btn-primary btn-lg" id="addPersonButton" onclick="return addPersonHandler()">+</button> -->
+
 
 
 
@@ -101,7 +94,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Stäng</button>
-                <button type="button" class="btn btn-primary btn-lg" onclick="return printTransactions()">Skriv ut</button>
+                <button type="button" class="btn btn-primary btn-lg" onclick="return printTransactions()">
+                    Skriv ut</button>
 
             </div>
         </div>
@@ -112,18 +106,19 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title" id="helpModalLabel"><i class="fa fa-question-circle q-mark"> </i>Hjälp</h1>
+                <h1 class="modal-title" id="helpModalLabel">Hjälp</h1>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body" id="helpModalBody">
-                <p>Såhär gör du</p>
+                <p class="display-4">Såhär gör du</p>
                 Fyll i namn och utlagt belopp för varje person som ska vara med och dela på totalkostnaden. Klicka på <i>Räkna ut!</i> för att räkna ut
                 hur transaktionerna (swisharna) ska genomföras. Lägg till fler personer som ska dela på kostnaden genom att klicka på plustecknet. Lägg även till
                 personer med 0 kr i utlägg för att de ska vara med och dela på kostnaderna.
                 <p></p>
-                <p>FAQ</p>
+                Det gör ingenting om du råkar lägga till fler personer än du behöver. Applikationen detekterar detta och räknar inte med dessa personer.
+                <p class="display-4">FAQ</p>
 
                 <p></p>
                 <b>Vad är Swish?</b>
@@ -133,18 +128,18 @@
                 <b>Sidan visar att jag ska swisha till någon som inte lagt ut pengar, hur går det till?</b>
                 <p></p>
                 <i>Algoritmen tillåter att man 'kors-swishar' för att jämna ut beloppet. Detta säkerställer att för n personer kommer maximalt n-1 swishningar
-                krävas för att lösa ut alla personer. Var bara lugn, det kommer att bli rätt ändå! </i>
+                    krävas för att lösa ut alla personer. Var bara lugn, det kommer att bli rätt ändå! </i>
                 <p></p>
                 <b>Det saknas en krona i totalsumman, var tog den vägen?</b>
                 <p></p>
                 <i>Vid uträkningen sker en öresavrundning som gör att totalbeloppet inte alltid kommer att summeras exakt. Utvecklaren är övertygad om att den
-                saknade kronan kan återbetalas till dess rättmätige ägare i form av ett leende, eller en vänlig gest när tillfälle ges.</i>
+                    saknade kronan kan återbetalas till dess rättmätige ägare i form av ett leende, eller en vänlig gest när tillfälle ges.</i>
                 <p></p>
-                <b>Om man summerar alla transaktioner så blir inte totalbeloppet detsamma som anges!?</b>
+                <b>Om man summerar alla transaktioner i listan så blir inte totalbeloppet detsamma som anges!?</b>
                 <p></p>
                 <i>Det stämmer! Alla utlagda pengar kommer inte att ha swishats runt eftersom det endast är mellanskillnaden mellan det belopp som ska betalas och
-                    utlägget som kommer att räkas som en transaktion. Om man räknar samman alla inkommande transaktioner och de utlägg så kommer alla att ha betalat
-                lika mycket. <br> <small>Hemlighet: Funktionalitet för att visa hela uträkningskedjan är under utveckling.</small></i>
+                    utlägget som kommer att räkas som en transaktion. Om man räknar samman alla inkommande transaktioner och de utlägg som gjorts så kommer alla att ha betalat
+                    lika mycket. <br> <small>Hemlighet: Funktionalitet för att visa hela uträkningskedjan är under utveckling.</small></i>
                 <p></p>
                 <b>Jag saknar en funktionalitet på sidan :(</b>
                 <p></p>
@@ -152,6 +147,9 @@
                 <p></p>
                 <hr>
                 <i>Skapad av Joakim Argillander, transaktionsalgoritm av Axel Johansson.</i>
+                <p></p>
+                <p class="font-weight-light" >Denna webbtjänst utgör endast en fingervisning hur utlägg kan delas upp och upphovsmannen tar inget ansvar för korrektheten i
+                den transaktionslösning som föreslås.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Stäng</button>
@@ -162,11 +160,45 @@
     </div>
 </div>
 
+<div style="height:100%;width:100%"></div>
+
 <footer class="footer">
-    <div class="container">
-        <span class="text-muted"> <i class="fa fa-question-circle " onclick="javscript:$('#helpModal').modal();"></i> <small id="footer-signature">Joakim Argillander 2018</small></span>
+    <div class="alerts" id="alerts">
+
+        <div id="alert" class="alert alert-danger collapse center-block" role="alert">Hoppsan!
+            Fyll i minst två personer för att räkna ut hur ni ska swisha ;) Behöver du hjälp? <u><b onclick="javscript:$('#helpModal').modal();">Klicka HÄR!</b></u> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>     </div>
+
+        <div id="duplicate-name-alert" class="alert alert-danger collapse" role="alert">Hoppsan! Det verkar som att du har matat in två personer med samma namn. Försök igen med unika namn<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>     </div>
+
+        <div id="webapp-info" style="display:none" class="alert alert-primary alert-dismissible fade show" role="alert">
+            <strong></strong> Lägg till applikationen på hemskärmen för att enkelt komma åt den när du bäst behöver det!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+    </div>
+
+
+
+    <div class="container" id="footer-container">
+
+
+
+        <button id="addPersonButton" class="btn btn-lg btn-success footer-button"
+                onclick="return addPerson(true)">Lägg till person</button>
+        <button id="calculateButton" class="btn btn-primary btn-lg btn-info footer-button"
+                onclick="return calculateHandler()">Räkna ut!</button>
+        <button id="calculateBut2ton" class="btn btn-secondary btn-lg footer-button" onclick="javscript:$('#helpModal').modal();">?</button>
 
     </div>
 </footer>
+
+
+
 </body>
 </html>
