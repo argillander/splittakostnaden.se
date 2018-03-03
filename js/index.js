@@ -112,11 +112,11 @@ function addPerson(scroll){
         '<p id="addPersonText" onclick="addPersonHandler()" data-toggle="tooltip" title="Lägg till person" class="fa fa-plus-square fa-5x"></p></div>';
    // persons.append(addPersonDiv);
 
-    $("#addPersonDiv" +i).hide();
-    $("#addPersonDiv" +i).fadeIn(300);
+    var nth_person =  $("#addPersonDiv" +i)
+    nth_person.hide();
+    nth_person.fadeIn(300);
 
     if(scroll) {
-        console.log("scrolling to div");
         var to = document.getElementById("person" + i);
         zenscroll.center(to);
     }
