@@ -3,6 +3,7 @@
  */
 
 
+
 window.onload = function(){
     initTransactionEngine();
 
@@ -89,12 +90,15 @@ function calculateHandler(){
 
     calculateTransactions();
 
+    displayTransactions();
+
+    return false;
+}
+
+function displayTransactions(){
     $("#transactionHistory").html(getHistoryString());
     $("#myModal").modal("show");
 
-
-
-    return false;
 }
 
 function addPerson(scroll){

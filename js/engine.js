@@ -4,15 +4,12 @@
  * Algorithm by Axel Johansson
  */
 
-
+'use strict';
 
 function initTransactionEngine(){
     initPersons();
 
 }
-
-
-
 
 
 Array.prototype.last = function() {
@@ -21,7 +18,7 @@ Array.prototype.last = function() {
 
 Array.prototype.clear = function(){
     this.length = 0;
-}
+};
 
 Array.prototype.first = function(){
     return this[0];
@@ -52,8 +49,9 @@ function init(){
 function getAvg(){
     var totCost = 0;
     var totPers = 0;
+
     for(var i = 0; i < expenses.length; i++){
-        p = expenses[i];
+        var p = expenses[i];
         totCost += p.cost;
         totPers++;
     }
@@ -146,4 +144,28 @@ function getHistoryString(){
     s += '<h4> Totalkostnad: ' + Math.abs(globalTotalCost) + ' kr</h4>';
 
     return s;
+}
+
+
+function getRandomName(){
+    var len = names.length;
+    var index = Math.floor(Math.random() * len) +1;
+    return names[index];
+}
+
+
+function populate(n){
+    for(var i = 0; i < n; i++ ){
+        var exp = Math.floor(Math.random() * 2599);
+        addExpense(getRandomName(), exp);
+    }
+
+}
+
+function demo(n){
+    resetExpenses();
+    populate(n);
+    calculateTransactions();
+    displayTransactions();
+
 }
